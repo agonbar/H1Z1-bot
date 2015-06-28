@@ -11,13 +11,10 @@ var app = angular.module('h1z1', modules)
     }]
 );
 
-app.controller('LocationsController', ['$scope', '$location', function($scope, $location) {
+app.controller('BruteForceController', ['$scope', '$location', function($scope, $location) {
   $scope.locations = [{id:1, name:"Casa al lado bomberos", pin:false, active: true}];
+  $scope.clients = [];
 
   $scope.active = function(id) {}
   $scope.delete = function(id) {}
-}]);
-
-app.controller('ClientsController', ['$scope', '$location', function($scope, $location) {
-  $scope.clients = [];
 }]);

@@ -5,6 +5,7 @@
         "email": "reimashi@gmail.com"
     },
     "dependencies": {
+        "uuid": "latest",
         "body-parser": "latest",
         "express": "latest",
         "method-override": "latest",

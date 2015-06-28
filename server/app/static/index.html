@@ -12,7 +12,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <title>H1Z1 Force-Brute</title>
 </head>
-<body ng-app="h1z1">
+<body ng-app="h1z1" ng-controller="BruteForceController">
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -24,7 +24,7 @@
 
   <div class="container-fluid" style="margin-top: 60px;">
       <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main" ng-controller="LocationsController">
+        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1>Localizaciones</h1>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main" ng-controller="ClientsController">
+        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1>Clientes</h1>
           <div class="table-responsive">
             <table class="table table-striped">

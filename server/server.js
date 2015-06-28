@@ -24,10 +24,12 @@ function configure() {
 
     // Estableciendo las rutas
     var router = express.Router();
-    /*var userController = require('./app/api/controllers/user');
+    var locationsController = require('./app/api/controllers/locations');
 
-    router.route('/api/user/:id')
-        .get(userController.getUser);*/
+    router.route('/api/locations')
+        .get(locationsController.getLocations)
+        .post(locationsController.addLocation)
+        .update(locationsController.updateLocation);
 
     // Iniciando conexiones de socket.io
     io.on('connection', function(socket){
