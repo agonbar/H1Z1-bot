@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-animate.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+  <script src="angular-app.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <title>H1Z1 Force-Brute</title>
+</head>
+<body ng-app="h1z1">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">H1Z1 - Generador de fuerza bruta</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid" style="margin-top: 60px;">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main" ng-controller="LocationsController">
+          <h1>Localizaciones</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>PIN</th>
+                  <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="loc in locations">
+                  <td>{{loc.name}} <strong ng-if="loc.active">(Activo)</strong></td>
+                  <td><span ng-if="loc.pin">{{loc.pin}}</span><span ng-if="!loc.pin"><input type="text" pattern="[0-9]{4}" class="form-control" ng-model="newpin" ng-keypress="setpin(loc.id, newpin)" required/></span></td>
+                  <td>
+                    <a class="btn btn-primary" href="#" ng-if="!loc.active && loc.enabled" ng-click="active(loc.id)" role="button">Activar</a>
+                    <a class="btn btn-primary" href="#" ng-click="delete(loc.id)" role="button">Borrar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="form-control" ng-model="newlocationname" ng-keypress="newlocation(newlocationname)"/>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main" ng-controller="ClientsController">
+          <h1>Clientes</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>IP</th>
+                  <th>Claves</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="cli in clients">
+                  <td>{{cli.ip}}</td>
+                  <td>{{cli.keyset}}</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script
+
+</body>
+</html>

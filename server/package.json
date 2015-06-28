@@ -1,0 +1,22 @@
+{
+    "name": "h1z1-brute-force",
+    "version": "0.0.1",
+    "bugs": {
+        "email": "reimashi@gmail.com"
+    },
+    "dependencies": {
+        "body-parser": "latest",
+        "express": "latest",
+        "method-override": "latest",
+        "lowdb": "latest",
+        "winston": "latest",
+        "socket.io": "latest"
+    },
+    "private": true,
+    "description": "H1Z1 Brute Force",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Aitor González Fernández <reimashi@gmail.com>"
+}
