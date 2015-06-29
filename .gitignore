@@ -3,6 +3,8 @@ Thumbs.db
 ehthumbs.db
 
 server/node_modules
+client/bin
+client/obj
 
 # Folder config file
 Desktop.ini
