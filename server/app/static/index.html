@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
+  <script src="js/socket.io.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/angular-animate.min.js"></script>
   <script src="js/angular-route.min.js"></script>
@@ -27,9 +28,10 @@
         <div class="col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1>Localizaciones</h1>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped" ng-init="loadLocations()">
               <thead>
                 <tr>
+                  <th class="col-md-2">Estado</th>
                   <th>Nombre</th>
                   <th>PIN</th>
                   <th>#</th>
@@ -37,18 +39,30 @@
               </thead>
               <tbody>
                 <tr ng-repeat="loc in locations">
-                  <td>{{loc.name}} <strong ng-if="loc.active">(Activo)</strong></td>
-                  <td><span ng-if="loc.pin">{{loc.pin}}</span><span ng-if="!loc.pin"><input type="text" pattern="[0-9]{4}" class="form-control" ng-model="newpin" ng-keypress="setpin(loc.id, newpin)" required/></span></td>
+                  <td class="col-md-2">
+                      <strong ng-if="loc.id == activelocation" class="label label-info">Activo</strong>
+                      <strong ng-if="loc.pin" class="label label-success">Descifrado</strong>
+                      <strong ng-if="loc.id != activelocation && !loc.pin" class="label label-danger">Desconocido</strong>
+                  </td>
+                  <td>{{loc.name}}</td>
                   <td>
-                    <a class="btn btn-primary" href="#" ng-if="!loc.active && loc.enabled" ng-click="active(loc.id)" role="button">Activar</a>
-                    <a class="btn btn-primary" href="#" ng-click="delete(loc.id)" role="button">Borrar</a>
+                      <span ng-if="loc.pin">{{loc.pin}}</span>
+                      <span ng-if="!loc.pin">
+                          <input type="text" pattern="[0-9]{4}" class="form-control" ng-model="newpin" ng-blur='updateLocationPin(loc.id, newpin)' required/>
+                      </span>
+                  </td>
+                  <td>
+                    <a class="btn btn-primary" href="#" ng-if="loc.id != activelocation && !loc.pin" ng-click="active(loc.id)" role="button">Activar</a>
+                    <a class="btn btn-primary" href="#" ng-click="deleteLocation(loc.id)" role="button">Borrar</a>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" class="form-control" ng-model="newlocationname" ng-keypress="newlocation(newlocationname)"/>
+                    <input type="text" class="form-control" ng-model="newlocationname"/>
                   </td>
-                  <td></td>
+                  <td>
+                      <a class="btn btn-primary" href="#" ng-click="newLocation(newlocationname); newlocationname=''" role="button">Añadir</a>
+                  </td>
                   <td></td>
                 </tr>
               </tbody>
@@ -65,12 +79,15 @@
                 <tr>
                   <th>IP</th>
                   <th>Claves</th>
+                  <th>Ultima actualización</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="cli in clients">
-                  <td>{{cli.ip}}</td>
-                  <td>{{cli.keyset}}</td>
+                <tr ng-repeat="cinfo in clientsinfo">
+                  <td>{{cinfo.id}}</td>
+                  <td>{{cinfo.keys[0]}} - {{cinfo.keys.slice(-1)[0]}}</td>
+                  <td>{{cinfo.lastview | date:'MM/dd/yyyy @ h:mma'}}</td>
+                </tr>
               </tbody>
             </table>
           </div>
